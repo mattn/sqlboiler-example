@@ -1,0 +1,6 @@
+output   = "models"
+wipe     = true
+no_tests = true
+
+[sqlite3]
+  dbname = "models.sqlite"
