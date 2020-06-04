@@ -13,10 +13,10 @@ import (
 	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
-func doSomething() error {
+func main() {
 	db, err := sql.Open("sqlite3", "models.sqlite")
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
 
 	// select Users
@@ -32,7 +32,6 @@ func doSomething() error {
 	tx, err := db.BeginTx(context.Background(), nil)
 	if err != nil {
 		log.Fatal(err)
-		return err
 	}
 	defer tx.Rollback()
 
@@ -47,16 +46,6 @@ func doSomething() error {
 	tx.Commit()
 
 	user, err = models.Users().One(context.Background(), db)
-	if err != nil {
-		log.Fatal(err)
-		return err
-	}
-
-	return nil
-}
-
-func main() {
-	err := doSomething()
 	if err != nil {
 		log.Fatal(err)
 	}
